@@ -1,0 +1,10 @@
+# SOFE3980U-Labs
+
+**Author**  
+-----------
+Calvin Reveredo (100825740)
+
+:open_file_folder: Repository Files  
+---------------------------------
+Lab 1 - BinaryCalculator  
+Lab 2 - BinaryCalculatorWebapp
