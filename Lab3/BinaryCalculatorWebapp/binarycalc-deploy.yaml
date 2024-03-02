@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: binarycalc-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: binarycalc
+  template:
+    metadata:
+      labels:
+        app: binarycalc
+    spec:
+      containers:
+        - image: binarycalc/binarycalc-server
+          name: binarycalc
+          ports:
+            - containerPort: 8080
+              name: binarycalc
