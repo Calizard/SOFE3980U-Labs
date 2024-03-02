@@ -13,7 +13,7 @@ spec:
         app: binarycalc
     spec:
       containers:
-        - image: binarycalc/binarycalc-server
+        - image: northamerica-northeast2-docker.pkg.dev/buoyant-history-415921/sofe3980u/binarycalc
           name: binarycalc
           ports:
             - containerPort: 8080
