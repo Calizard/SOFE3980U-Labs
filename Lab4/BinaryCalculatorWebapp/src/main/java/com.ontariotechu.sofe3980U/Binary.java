@@ -29,12 +29,11 @@ public class Binary
 		}
 		//beg has the index of the first non zero digit in the number
 		this.number=number.substring(beg); // exclude the trailing zeros if any
-		// uncomment the following code
-		
+
 		if(this.number=="") { // replace empty strings with a single zero
 			this.number="0";
 		}
-		
+
     }
 	/**
 	* Return the binary value of the variable
@@ -78,5 +77,97 @@ public class Binary
 		Binary result=new Binary(num3);  // create a binary object with the calculated value.
 		return result;
 		
+	}
+	/**
+	 * Bitwise logical OR of two binary variables.
+	 *
+	 * @param num1 The first operand
+	 * @param num2 The second operand
+	 * @return A binary variable with a value of <i>num1 OR num2</i>.
+	 */
+	public static Binary or(Binary num1, Binary num2) {
+		StringBuilder result = new StringBuilder();
+		int length = Math.max(num1.number.length(), num2.number.length());
+		num1.padLeft(length);
+		num2.padLeft(length);
+
+		for (int i = 0; i < length; i++) {
+			char bit1 = (i < num1.number.length()) ? num1.number.charAt(i) : '0';
+			char bit2 = (i < num2.number.length()) ? num2.number.charAt(i) : '0';
+
+			if (bit1 == '1' || bit2 == '1') {
+				result.append('1');
+			} else {
+				result.append('0');
+			}
+		}
+
+		return new Binary(result.toString());
+	}
+
+	/**
+	 * Bitwise logical AND of two binary variables.
+	 *
+	 * @param num1 The first operand
+	 * @param num2 The second operand
+	 * @return A binary variable with a value of <i>num1 AND num2</i>.
+	 */
+	public static Binary and(Binary num1, Binary num2) {
+		StringBuilder result = new StringBuilder();
+		int length = Math.min(num1.number.length(), num2.number.length());
+		num1.padLeft(length);
+		num2.padLeft(length);
+
+		for (int i = 0; i < length; i++) {
+			char bit1 = num1.number.charAt(i);
+			char bit2 = num2.number.charAt(i);
+
+			if (bit1 == '1' && bit2 == '1') {
+				result.append('1');
+			} else {
+				result.append('0');
+			}
+		}
+
+		return new Binary(result.toString());
+	}
+
+	/**
+	 * Multiply two binary variables using the add function.
+	 *
+	 * @param num1 The first factor
+	 * @param num2 The second factor
+	 * @return A binary variable with a value of <i>num1 * num2</i>.
+	 */
+	public static Binary multiply(Binary num1, Binary num2) {
+		Binary result = new Binary("0");
+		int length = Math.max(num1.number.length(), num2.number.length());
+		
+		Binary origNum1 = new Binary(num1.number);
+
+		num1.padLeft(length);
+		num2.padLeft(length);
+
+		for (int i = length - 1; i >= 0; i--) {
+			int bit = num2.number.charAt(i) - '0';
+			if (bit == 1) {
+				result = add(result, num1);
+			}
+			num1.number += '0'; // Shift left by adding a zero at the end
+		}
+
+		num1.number = origNum1.number;
+
+		return result;
+	}
+	/**
+	 * Pads the left side of a binary number.
+	 * 
+	 * @param length
+	 */
+	public void padLeft(int length) {
+		while (number.length() < length) {
+			number = '0' + number;
+		}
 	}
 }	
