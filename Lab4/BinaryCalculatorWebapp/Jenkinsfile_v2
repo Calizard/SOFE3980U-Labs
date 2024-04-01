@@ -12,7 +12,7 @@ pipeline {
   
 agent {
     kubernetes {
-	inheritFrom 'sample-app'
+	inheritFrom 'binarycalc-deployment'
       defaultContainer 'jnlp'
       yaml """
 apiVersion: v1
